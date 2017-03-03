@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SwfExtractor.Tags {
 
-	[System.Diagnostics.DebuggerDisplay( "[{TagCode}] Offset: {Offset}, Length: {Length}" )]
+	[DebuggerDisplay( "[{TagCode}] Offset: {Offset}, Length: {Length}" )]
 	public abstract class SwfTag {
 
 		public TagType TagCode { get; private set; }
@@ -15,11 +16,12 @@ namespace SwfExtractor.Tags {
 		public int Length { get; private set; }
 		public int DataLength { get { return Length - ( DataOffset - Offset ); } }
 
+		[DebuggerBrowsable( DebuggerBrowsableState.Never )]
 		protected byte[] RawData { get; private set; }
 
 
-		public SwfTag( byte[] data, int offset ) {
-			
+		internal SwfTag( byte[] data, int offset ) {
+
 			RawData = data;
 			Offset = offset;
 
@@ -36,7 +38,7 @@ namespace SwfExtractor.Tags {
 			DataOffset = offset;
 		}
 
-		public static TagType GetTagCode( byte[] data, int offset ) {
+		internal static TagType GetTagCode( byte[] data, int offset ) {
 			return (TagType)TagUtilities.PickBits( data, offset, 0, 10 );
 		}
 	}

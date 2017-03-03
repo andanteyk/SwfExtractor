@@ -77,7 +77,7 @@ namespace SwfExtractor.Structures {
 		}
 
 		
-		public static byte[] GetHeader( byte[] rawData, out SwfHeader header ) {
+		internal static byte[] GetHeader( byte[] rawData, out SwfHeader header ) {
 
 			int offset = 0;
 			header = new SwfHeader();

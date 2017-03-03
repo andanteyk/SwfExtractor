@@ -28,7 +28,7 @@ namespace SwfExtractor.Tags {
 		// clip actions are not implemented
 
 
-		public PlaceObject2( byte[] data, int offset )
+		internal PlaceObject2( byte[] data, int offset )
 			: base( data, offset ) {
 
 			DataOffset -= 2;		// character id
@@ -71,7 +71,7 @@ namespace SwfExtractor.Tags {
 				int n;
 				for ( n = index; data[n] != 0; n++ ) ;
 
-				var encoding = Encoding.GetEncoding( 932 );
+				var encoding = Encoding.GetEncoding( 65001 );
 				Name = encoding.GetString( data, index, n - index );
 				index += n - index + 1;
 			}

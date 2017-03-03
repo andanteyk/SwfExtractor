@@ -9,7 +9,7 @@ namespace SwfExtractor.Tags {
 
 	public abstract class ImageTag : CharacterTag {
 
-		public ImageTag( byte[] data, int offset )
+		internal ImageTag( byte[] data, int offset )
 			: base( data, offset ) {
 		}
 

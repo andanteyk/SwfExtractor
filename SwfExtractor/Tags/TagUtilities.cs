@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SwfExtractor.Tags {
-	public static class TagUtilities {
 
-		// note: optimize
+	internal static class TagUtilities {
+
+		// undone: optimize
 
 		/// <summary>
 		/// バイト配列から符号なし整数を切り出します。
@@ -117,7 +118,7 @@ namespace SwfExtractor.Tags {
 
 						return ret.ToArray();
 					}
-					
+
 				}
 			}
 

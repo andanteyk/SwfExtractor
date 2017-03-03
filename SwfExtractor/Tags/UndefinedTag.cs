@@ -8,7 +8,7 @@ namespace SwfExtractor.Tags {
 
 	public class UndefinedTag : SwfTag {
 
-		public UndefinedTag( byte[] data, int offset )
+		internal UndefinedTag( byte[] data, int offset )
 			: base( data, offset ) {
 		}
 	}

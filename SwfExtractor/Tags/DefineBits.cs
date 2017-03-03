@@ -9,7 +9,7 @@ namespace SwfExtractor.Tags {
 	
 	public class DefineBits : ImageTag {
 
-		public DefineBits( byte[] data, int offset )
+		internal DefineBits( byte[] data, int offset )
 			: base( data, offset ) {
 		}
 

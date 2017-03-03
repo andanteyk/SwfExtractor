@@ -16,7 +16,7 @@ namespace SwfExtractor.Tags {
 		public int ColorTableSize { get; private set; }
 
 
-		public DefineBitsLossless( byte[] data, int offset )
+		internal DefineBitsLossless( byte[] data, int offset )
 			: base( data, offset ) {
 
 			BitmapFormat = (BitsLosslessBitmapFormat)TagUtilities.PickBytes( data, DataOffset + 0, 1 );

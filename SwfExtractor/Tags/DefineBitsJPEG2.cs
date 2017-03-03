@@ -10,7 +10,7 @@ namespace SwfExtractor.Tags {
 	
 	public class DefineBitsJPEG2 : ImageTag {
 
-		public DefineBitsJPEG2( byte[] data, int offset )
+		internal DefineBitsJPEG2( byte[] data, int offset )
 			: base( data, offset ) {
 
 		}

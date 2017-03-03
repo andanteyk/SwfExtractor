@@ -14,7 +14,7 @@ namespace SwfExtractor.Tags {
 		private List<SwfTag> _controlTags { get; set; }
 		public ReadOnlyCollection<SwfTag> ControlTags { get { return _controlTags.AsReadOnly(); } }
 
-		public DefineSprite( byte[] data, int offset )
+		internal DefineSprite( byte[] data, int offset )
 			: base( data, offset ) {
 
 			FrameCount = TagUtilities.PickBytes16( data, DataOffset + 0 );
@@ -26,7 +26,7 @@ namespace SwfExtractor.Tags {
 
 			int index = DataOffset;
 			while ( index <= Offset + Length ) {
-				var tag = SwfExtractor.GetTag( data, index );
+				var tag = SwfParser.GetTag( data, index );
 				if ( tag == null )
 					break;
 				_controlTags.Add( tag );
@@ -34,5 +34,22 @@ namespace SwfExtractor.Tags {
 			}
 		}
 
+
+		public IEnumerable<T> FindTags<T>() where T : SwfTag {
+			return FindTagsInteral<T>( ControlTags );
+		}
+
+		private IEnumerable<T> FindTagsInteral<T>( IEnumerable<SwfTag> tags ) where T : SwfTag {
+			foreach ( var tag in tags ) {
+
+				if ( tag is T )
+					yield return tag as T;
+
+				if ( tag is DefineSprite ) {
+					foreach ( var child in FindTagsInteral<T>( ( tag as DefineSprite ).ControlTags ) )
+						yield return child;
+				}
+			}
+		}
 	}
 }

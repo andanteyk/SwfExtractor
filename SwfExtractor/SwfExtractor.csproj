@@ -60,13 +60,15 @@
     <Compile Include="Structures\Matrix.cs" />
     <Compile Include="Structures\Rectangle.cs" />
     <Compile Include="Structures\SwfHeader.cs" />
-    <Compile Include="SwfExtractor.cs" />
+    <Compile Include="SwfParser.cs" />
     <Compile Include="Tags\CharacterTag.cs" />
     <Compile Include="Tags\DefineBits.cs" />
     <Compile Include="Tags\DefineBitsJPEG2.cs" />
     <Compile Include="Tags\DefineBitsJPEG3.cs" />
     <Compile Include="Tags\DefineBitsLossless.cs" />
     <Compile Include="Tags\DefineBitsLossless2.cs" />
+    <Compile Include="Tags\DefineShape.cs" />
+    <Compile Include="Tags\DefineSound.cs" />
     <Compile Include="Tags\DefineSprite.cs" />
     <Compile Include="Tags\ImageTag.cs" />
     <Compile Include="Tags\PlaceObject2.cs" />
@@ -74,9 +76,7 @@
     <Compile Include="Tags\TagUtilities.cs" />
     <Compile Include="Tags\UndefinedTag.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,23 +2,24 @@
 using SwfExtractor.Tags;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SwfExtractor {
-	public class SwfExtractor {
+	public class SwfParser {
 
 		public SwfHeader Header { get; private set; }
 		public List<SwfTag> Tags { get; private set; }
 
 		public byte[] RawData { get; private set; }
 
-		public SwfExtractor() {
+		public SwfParser() {
 		}
 
 
-		public void Load( byte[] data ) {
+		public void Parse( byte[] data ) {
 
 			{
 				SwfHeader header;
@@ -43,7 +44,34 @@ namespace SwfExtractor {
 		}
 
 
-		public static SwfTag GetTag( byte[] data, int offset ) {
+		public void Parse( string path ) {
+			using ( var reader = new FileStream( path, FileMode.Open, FileAccess.Read, FileShare.Read ) ) {
+				var bin = new byte[reader.Length];
+				reader.Read( bin, 0, (int)reader.Length );
+				Parse( bin );
+			}
+		}
+
+
+		public IEnumerable<T> FindTags<T>() where T : SwfTag {
+			return FindTagsInteral<T>( Tags );
+		}
+
+		private IEnumerable<T> FindTagsInteral<T>( IEnumerable<SwfTag> tags ) where T : SwfTag {
+			foreach ( var tag in tags ) {
+
+				if ( tag is T )
+					yield return tag as T;
+
+				if ( tag is DefineSprite ) {
+					foreach ( var child in FindTagsInteral<T>( ( tag as DefineSprite ).ControlTags ) )
+						yield return child;
+				}
+			}
+		}
+
+
+		internal static SwfTag GetTag( byte[] data, int offset ) {
 
 			switch ( SwfTag.GetTagCode( data, offset ) ) {
 
@@ -63,8 +91,15 @@ namespace SwfExtractor {
 					return new DefineBitsLossless2( data, offset );
 
 
+				case TagType.DefineSound:
+					return new DefineSound( data, offset );
+
+
 				case TagType.PlaceObject2:
 					return new PlaceObject2( data, offset );
+
+				case TagType.DefineShape:
+					return new DefineShape( data, offset );
 
 
 				case TagType.DefineSprite:

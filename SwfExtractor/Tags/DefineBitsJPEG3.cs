@@ -18,7 +18,7 @@ namespace SwfExtractor.Tags {
 
 		public int ImageDataSize { get; private set; }
 
-		public DefineBitsJPEG3( byte[] data, int offset )
+		internal DefineBitsJPEG3( byte[] data, int offset )
 			: base( data, offset ) {
 
 			ImageDataSize = (int)TagUtilities.PickBytes32( data, DataOffset );

@@ -22,6 +22,10 @@ namespace SwfExtractor.Structures {
 		public readonly int TranslateXTwips;
 		public readonly int TranslateYTwips;
 
+		public float TranslateX { get { return TranslateXTwips / 20.0f; } }
+		public float TranslateY { get { return TranslateYTwips / 20.0f; } }
+
+
 		public Matrix( bool hasScale, int scaleBits, double scaleX, double scaleY,
 			bool hasRotate, int rotateBits, double rotateSkew0, double rotateSkew1,
 			int translateBits, int translateX, int translateY ) {
@@ -82,7 +86,7 @@ namespace SwfExtractor.Structures {
 			offsetBit += translateBits;
 			int translateY = Tags.TagUtilities.PickSignedBits( data, offset, offsetBit, translateBits, false );
 			offsetBit += translateBits;
-			
+
 
 			matrix = new Matrix( hasScale, scaleBits, scaleX / 65536.0, scaleY / 65536.0,
 				hasRotate, rotateBits, rotateSkew0 / 65536.0, rotateSkew1 / 65536.0,
