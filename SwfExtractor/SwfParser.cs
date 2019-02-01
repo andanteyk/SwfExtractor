@@ -105,6 +105,8 @@ namespace SwfExtractor {
 				case TagType.DefineSprite:
 					return new DefineSprite( data, offset );
 
+                case TagType.DefineBinaryData:
+                    return new DefineBinaryData( data, offset );
 
 				case TagType.End:
 					return null;
