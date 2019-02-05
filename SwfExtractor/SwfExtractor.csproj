@@ -62,6 +62,7 @@
     <Compile Include="Structures\SwfHeader.cs" />
     <Compile Include="SwfParser.cs" />
     <Compile Include="Tags\CharacterTag.cs" />
+    <Compile Include="Tags\DefineBinaryData.cs" />
     <Compile Include="Tags\DefineBits.cs" />
     <Compile Include="Tags\DefineBitsJPEG2.cs" />
     <Compile Include="Tags\DefineBitsJPEG3.cs" />
